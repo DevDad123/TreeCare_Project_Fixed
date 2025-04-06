@@ -243,7 +243,7 @@ class Diseasescreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 55),
+                    padding: const EdgeInsets.only(left: 56),
                     child: IconButton(
                       iconSize: 30,
                       onPressed: () {
