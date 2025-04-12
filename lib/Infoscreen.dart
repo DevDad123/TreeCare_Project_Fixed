@@ -1,5 +1,6 @@
-import 'package:a/LogIn.dart';
+import 'package:a/Login.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Infoscreen extends StatefulWidget {
   const Infoscreen({super.key});
@@ -10,6 +11,13 @@ class Infoscreen extends StatefulWidget {
 
 class _InfoscreenState extends State<Infoscreen> {
   @override
+  void _signout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => login()),
+    );
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
@@ -218,12 +226,8 @@ class _InfoscreenState extends State<Infoscreen> {
           SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(onPressed: () {
-              Navigator.push(
-                  context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-              );
-            },
+            child: ElevatedButton(
+              onPressed: () => _signout(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey,
                 foregroundColor: Colors.red,

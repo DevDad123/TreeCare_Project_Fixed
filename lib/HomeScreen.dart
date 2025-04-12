@@ -1,16 +1,31 @@
+import 'package:a/Login.dart';
 import 'package:a/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'Chatbot.dart';
 import 'Diseasescreen.dart';
 import 'Infoscreen.dart';
 import 'Scanscreen.dart';
-void main(){
+
+void main() {
   Gemini.init(apiKey: GEMINI_API_KEY);
-  runApp(const Homescreen());
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const Homescreen(),
+    );
+  }
 }
 
 class Homescreen extends StatefulWidget {
@@ -31,15 +46,21 @@ class _HomescreenState extends State<Homescreen> {
 
   int _selectedIndex = 0;
 
+  void _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => login()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => _signOut(context),
           icon: const Icon(Icons.exit_to_app),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
@@ -63,8 +84,8 @@ class _HomescreenState extends State<Homescreen> {
           Icon(Icons.home, color: Colors.black),
           Icon(Icons.medical_information, color: Colors.black),
           Icon(Icons.flip_camera_ios, color: Colors.black),
-          Icon(Icons.chat, color: Colors.black), // Fixed incorrect icon
-          Icon(Icons.info, color: Colors.black), // Changed for better clarity
+          Icon(Icons.chat, color: Colors.black),
+          Icon(Icons.info, color: Colors.black),
         ],
         onTap: (index) {
           setState(() {
