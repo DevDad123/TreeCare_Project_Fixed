@@ -1,0 +1,2 @@
+D:/TreeCare_Project-master/android/app/.cxx/RelWithDebInfo/6w2k4f4n/x86/CMakeFiles/edit_cache.dir
+D:/TreeCare_Project-master/android/app/.cxx/RelWithDebInfo/6w2k4f4n/x86/CMakeFiles/rebuild_cache.dir

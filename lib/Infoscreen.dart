@@ -10,7 +10,6 @@ class Infoscreen extends StatefulWidget {
 }
 
 class _InfoscreenState extends State<Infoscreen> {
-  @override
   void _signout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
@@ -18,6 +17,8 @@ class _InfoscreenState extends State<Infoscreen> {
       MaterialPageRoute(builder: (_) => login()),
     );
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
@@ -48,7 +49,7 @@ class _InfoscreenState extends State<Infoscreen> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Text(
                         "treecareprofile",
                         style: TextStyle(
@@ -69,161 +70,33 @@ class _InfoscreenState extends State<Infoscreen> {
               ),
             ),
           ),
+          const SizedBox(height: 20),
 
-          SizedBox(height: 20),
-
-          // First Button - Personal Information
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Icon(Icons.people, size: 25),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Personal Information",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_circle_right_outlined),
-                      onPressed: () {
-                        print("Personal Information clicked");
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          // Buttons
+          buildMenuButton(
+            icon: Icons.people,
+            title: "Personal Information",
+            onTap: () => print("Personal Information clicked"),
+          ),
+          buildMenuButton(
+            icon: Icons.language,
+            title: "Languages",
+            onTap: () => print("Languages clicked"),
+          ),
+          buildMenuButton(
+            icon: Icons.colorize,
+            title: "Themes",
+            onTap: () => print("Themes clicked"),
+          ),
+          buildMenuButton(
+            icon: Icons.help,
+            title: "Help & Support",
+            onTap: () => print("Help & Support clicked"),
           ),
 
-          // Second Button - Languages
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Icon(Icons.language, size: 25),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Languages",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_circle_right_outlined),
-                      onPressed: () {
-                        print("Languages clicked");
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const SizedBox(height: 40),
 
-          // Third Button - Themes
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Icon(Icons.colorize, size: 25),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Themes",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_circle_right_outlined),
-                      onPressed: () {
-                        print("Themes clicked");
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // Fourth Button - Help & Support
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Icon(Icons.help, size: 25),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        "Help & Support",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_circle_right_outlined),
-                      onPressed: () {
-                        print("Help & Support clicked");
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 40),
+          // Log out button
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
@@ -231,17 +104,61 @@ class _InfoscreenState extends State<Infoscreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey,
                 foregroundColor: Colors.red,
-                minimumSize: Size(200, 50),
+                minimumSize: const Size(200, 50),
                 shadowColor: Colors.black,
                 elevation: 10,
               ),
-              child: Text("LOG OUT",style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),),
+              child: const Text(
+                "LOG OUT",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  // Small helper function to build each menu button
+  Widget buildMenuButton({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        height: 60,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Icon(icon, size: 30),
+            const SizedBox(width: 15),
+            Expanded(
+              child: Center(
+                child: Text(
+                  title,
+                  style: const TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.arrow_circle_right_outlined),
+              iconSize: 30,
+              onPressed: onTap,
+            ),
+            const SizedBox(width: 10),
+          ],
+        ),
       ),
     );
   }

@@ -2,8 +2,7 @@
 
     <!-- For Android 10+ compatibility (Scoped Storage) -->
     <application
-        android:label="a"
-        android:name="${applicationName}"
+        android:label="TreeCare"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 

@@ -1,9 +1,6 @@
 import 'package:a/Services/auth_service.dart';
 import 'package:a/Signin.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'main.dart';
 import 'package:a/HomeScreen.dart';
 
 class login extends StatefulWidget {
@@ -18,11 +15,18 @@ class _loginState extends State<login> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   Future<void> _login() async {
     try {
       await widget._authService.Login(
-        _emailController.text,
-        _passwordController.text,
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
       );
       Navigator.pushReplacement(
         context,
@@ -30,7 +34,7 @@ class _loginState extends State<login> {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Login Failed $e")),
+        SnackBar(content: Text("Login Failed: $e")),
       );
     }
   }
@@ -39,7 +43,7 @@ class _loginState extends State<login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/logo.png"),
             fit: BoxFit.cover,
@@ -50,7 +54,7 @@ class _loginState extends State<login> {
           child: Container(
             height: MediaQuery.of(context).size.height * 4.5 / 10,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
@@ -58,12 +62,11 @@ class _loginState extends State<login> {
               ),
             ),
             child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       "TREECARE",
                       style: TextStyle(
@@ -73,7 +76,7 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -84,7 +87,7 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   TextField(
                     controller: _passwordController,
                     obscureText: true,
@@ -96,18 +99,18 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
+                          context,
                           MaterialPageRoute(builder: (_) => Signin()),
                         );
                       },
                       child: const Text(
-                          "Don't have an account?",
+                        "Don't have an account?",
                         style: TextStyle(
                           color: Colors.green,
                           fontSize: 14,
@@ -116,24 +119,24 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20),
                   Center(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(200, 50),
+                        minimumSize: const Size(200, 50),
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
-                        )
-                      ),
-                        onPressed: _login,
-                        child: Text(
-                            "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
                         ),
+                      ),
+                      onPressed: _login,
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
                   ),
                 ],

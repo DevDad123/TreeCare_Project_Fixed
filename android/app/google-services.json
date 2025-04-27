@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342852601914",
+    "project_id": "treecare-69504",
+    "storage_bucket": "treecare-69504.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342852601914:android:839104b2756baaca408d03",
+        "android_client_info": {
+          "package_name": "com.example.a"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC21N5cEZ22pprJI8idCS4oCk-so3OPOAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
